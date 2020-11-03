@@ -1,7 +1,13 @@
 package it.unibo.oop.lab.collections2;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * 
@@ -29,6 +35,7 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
      * 
      * think of what type of keys and values would best suit the requirements
      */
+	private final Map<String, Collection<U>> followedUsers;
 
     /*
      * [CONSTRUCTORS]
@@ -56,6 +63,7 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
      */
     public SocialNetworkUserImpl(final String name, final String surname, final String user, final int userAge) {
         super(name, surname, user, userAge);
+        followedUsers = new HashMap<>();
     }
 
     /*
@@ -63,20 +71,37 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
      * 
      * Implements the methods below
      */
+    private boolean hasCircle(String circle) {
+    	return this.followedUsers.keySet().contains(circle);
+    }
+    
+    private void addCircle(String circle) {
+    	this.followedUsers.put(circle, new HashSet<>());
+    }
 
     @Override
     public boolean addFollowedUser(final String circle, final U user) {
-        return false;
+    	if (!this.hasCircle(circle)) {
+    		this.addCircle(circle);
+    	}
+        return this.followedUsers.get(circle).add(user);
     }
 
     @Override
     public Collection<U> getFollowedUsersInGroup(final String groupName) {
-        return null;
+    	if(!this.hasCircle(groupName)) {
+    		return new HashSet<>();
+    	}
+        return new HashSet<>(this.followedUsers.get(groupName));
     }
 
     @Override
     public List<U> getFollowedUsers() {
-        return null;
+    	List<U> followedUsers = new ArrayList<>();
+    	for (var circleUsers : this.followedUsers.values()) {
+    		followedUsers.addAll(circleUsers);
+    	}
+        return followedUsers;
     }
 
 }
