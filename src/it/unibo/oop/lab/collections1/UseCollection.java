@@ -17,6 +17,14 @@ public final class UseCollection {
     private static final int TO_MS = 1_000_000;
     
     private static final int TO_READ = 1000;
+    
+    
+    private static final long AFRICA_POPULATION = 1_110_635_000L;
+    private static final long AMERICAS_POPULATION = 972_005_000L;
+    private static final long ANTARTICA_POPULATION = 0L;
+    private static final long ASIA_POPULATION = 4_298_723_000L;
+    private static final long EUROPE_POPULATION = 742_452_000L;
+    private static final long OCEANIA_POPULATION = 38_304_000L;
 
     private UseCollection() {
     }
@@ -136,12 +144,12 @@ public final class UseCollection {
          * Oceania -> 38,304,000
          */
         Map<String, Long> populations = new HashMap<>();
-        populations.put("Africa", 1_110_635_000L);
-        populations.put("Americas", 972_005_000L);
-        populations.put("Antartica", 0L);
-        populations.put("Asia", 4_298_723_000L);
-        populations.put("Europe", 742_452_000L);
-        populations.put("Oceania", 138_304_000L);
+        populations.put("Africa", AFRICA_POPULATION);
+        populations.put("Americas", AMERICAS_POPULATION);
+        populations.put("Antartica", ANTARTICA_POPULATION);
+        populations.put("Asia", ASIA_POPULATION);
+        populations.put("Europe", EUROPE_POPULATION);
+        populations.put("Oceania", OCEANIA_POPULATION);
         /*
          * 8) Compute the population of the world
          */
