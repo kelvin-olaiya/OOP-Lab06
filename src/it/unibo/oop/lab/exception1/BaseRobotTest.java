@@ -99,7 +99,7 @@ public final class BaseRobotTest {
         	r2.moveUp();
         	Assert.fail();
         } catch (PositionOutOfBoundException e) {
-        	assertNotNull(e);
+        	Assert.fail("Should be impossibile with no battery");
         	System.out.println(e.getMessage());
         } catch (NoEnoughBatteryException e) {
         	assertNotNull(e);

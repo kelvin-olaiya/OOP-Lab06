@@ -34,7 +34,7 @@ public class Robot {
      * 
      * @return If the Up movement has been performed
      */
-    public void moveUp() throws PositionOutOfBoundException, NoEnoughBatteryException {
+    public void moveUp() {
         moveToPosition(environment.getCurrPosX(), this.environment.getCurrPosY() + Robot.MOVEMENT_DELTA);
     }
 
@@ -43,7 +43,7 @@ public class Robot {
      * 
      * @return If the Down movement has been performed
      */
-    public void moveDown() throws PositionOutOfBoundException, NoEnoughBatteryException  {
+    public void moveDown()  {
         this.moveToPosition(this.environment.getCurrPosX(), environment.getCurrPosY() - Robot.MOVEMENT_DELTA);
     }
 
@@ -52,7 +52,7 @@ public class Robot {
      * 
      * @return A boolean indicating if the Left movement has been performed
      */
-    public void moveLeft() throws PositionOutOfBoundException, NoEnoughBatteryException {
+    public void moveLeft() {
         this.moveToPosition(this.environment.getCurrPosX() - Robot.MOVEMENT_DELTA,
                 this.environment.getCurrPosY());
     }
@@ -62,7 +62,7 @@ public class Robot {
      * 
      * @return A boolean indicating if the Right movement has been performed
      */
-    public void moveRight() throws PositionOutOfBoundException, NoEnoughBatteryException {
+    public void moveRight() {
         this.moveToPosition(this.environment.getCurrPosX() + Robot.MOVEMENT_DELTA,
                 this.environment.getCurrPosY());
     }
@@ -83,10 +83,11 @@ public class Robot {
      *            the new Y position to move the robot to
      * @return true if robot gets moved, false otherwise
      */
-    private void moveToPosition(final int newX, final int newY) throws PositionOutOfBoundException, NoEnoughBatteryException {
+    private void moveToPosition(final int newX, final int newY) {
         if (this.isBatteryEnoughToMove()) {
         	this.environment.move(newX, newY);
         	this.consumeBatteryForMovement();
+        	this.log("Moved to position(" + newX + ", " + newY + ")");
         } else {
             throw new NoEnoughBatteryException();
         }
