@@ -102,13 +102,11 @@ public final class UseCollection {
         System.out.println("Inserting " + ELEMS
                 + " int in a ArrayList took " + time
                 + "ns (" + time / TO_MS + "ms)");
-        //System.out.println(list);
         // Linked
         time = headInsertTest(llist, ELEMS);
         System.out.println("Inserting " + ELEMS
                 + " int in a LinkedList took " + time
                 + "ns (" + time / TO_MS + "ms)");
-        //System.out.println(llist);
         /*
          * 6) Measure the performance of reading 1000 times an element whose
          * position is in the middle of the collection for both ArrayList and
@@ -119,14 +117,12 @@ public final class UseCollection {
         System.out.println("Reading " + TO_READ
                 + " of a ArrayList took " + time
                 + "ns (" + time / TO_MS + "ms)");
-        //System.out.println(list);
         
         
         time = readTest(llist, TO_READ);
         System.out.println("Reading " + TO_READ
                 + " of a LinkedList took " + time
                 + "ns (" + time / TO_MS + "ms)");
-        //System.out.println(llist);
         /*
          * 7) Build a new Map that associates to each continent's name its
          * population:
