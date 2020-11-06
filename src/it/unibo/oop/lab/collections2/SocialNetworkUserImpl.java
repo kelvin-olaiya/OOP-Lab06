@@ -35,7 +35,7 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
      * 
      * think of what type of keys and values would best suit the requirements
      */
-	private final Map<String, Collection<U>> followedUsers;
+	private final Map<String, Collection<U>> friends;
 
     /*
      * [CONSTRUCTORS]
@@ -63,7 +63,7 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
      */
     public SocialNetworkUserImpl(final String name, final String surname, final String user, final int userAge) {
         super(name, surname, user, userAge);
-        followedUsers = new HashMap<>();
+        this.friends = new HashMap<>();
     }
 
     /*
@@ -72,11 +72,11 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
      * Implements the methods below
      */
     private boolean hasCircle(String circle) {
-    	return this.followedUsers.keySet().contains(circle);
+    	return this.friends.keySet().contains(circle);
     }
     
     private void addCircle(String circle) {
-    	this.followedUsers.put(circle, new HashSet<>());
+    	this.friends.put(circle, new HashSet<>());
     }
 
     @Override
@@ -84,7 +84,7 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
     	if (!this.hasCircle(circle)) {
     		this.addCircle(circle);
     	}
-        return this.followedUsers.get(circle).add(user);
+        return this.friends.get(circle).add(user);
     }
 
     @Override
@@ -92,14 +92,14 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
     	if(!this.hasCircle(groupName)) {
     		return new HashSet<>();
     	}
-        return new HashSet<>(this.followedUsers.get(groupName));
+        return new HashSet<>(this.friends.get(groupName));
     }
 
     @Override
     public List<U> getFollowedUsers() {
     	List<U> followedUsers = new ArrayList<>();
-    	for (var circleUsers : this.followedUsers.values()) {
-    		followedUsers.addAll(circleUsers);
+    	for (var circleFriends : this.friends.values()) {
+    		followedUsers.addAll(circleFriends);
     	}
         return followedUsers;
     }
