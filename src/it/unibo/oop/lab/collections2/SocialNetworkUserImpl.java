@@ -2,6 +2,7 @@ package it.unibo.oop.lab.collections2;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -72,7 +73,7 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
      * Implements the methods below
      */
     private boolean hasCircle(String circle) {
-    	return this.friends.keySet().contains(circle);
+    	return this.friends.get(circle) != null;
     }
     
     private void addCircle(String circle) {
@@ -90,18 +91,21 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
     @Override
     public Collection<U> getFollowedUsersInGroup(final String groupName) {
     	if(!this.hasCircle(groupName)) {
-    		return new HashSet<>();
+    		return Collections.emptyList();
     	}
         return new HashSet<>(this.friends.get(groupName));
     }
 
     @Override
     public List<U> getFollowedUsers() {
-    	List<U> followedUsers = new ArrayList<>();
+    	/*
+    	 * Pre-populate a set in order to prevent duplicates
+    	 */
+    	Set<U> followedUsers = new HashSet<>();
     	for (var circleFriends : this.friends.values()) {
     		followedUsers.addAll(circleFriends);
     	}
-        return followedUsers;
+        return new ArrayList<>(followedUsers);
     }
 
 }
